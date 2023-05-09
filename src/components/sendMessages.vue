@@ -1,12 +1,12 @@
 <template>
   <q-card class="q-pa-sm">
     <q-card-section>
-      <div class="text-h6">Envio de Mensagens {{ dateActivation }}</div>
+      <div class="text-h6">Envio de Mensagens</div>
       <div class="text-subtitle2">Disparo de mensagens de áudio e texto</div>
     </q-card-section>
     <q-card-section>
       <div class="row q-col-gutter-sm">
-        <div class="col-2">
+        <div class="col-xs-12 col-sm-6 col-md-3">
           <q-select
             filled
             dense
@@ -15,7 +15,7 @@
             label="Cidade"
           />
         </div>
-        <div class="col-2">
+        <div class="col-xs-12 col-sm-6 col-md-3">
           <q-select
             filled
             dense
@@ -24,7 +24,7 @@
             label="Status"
           />
         </div>
-        <div class="col-2">
+        <div class="col-xs-12 col-sm-6 col-md-3">
           <q-select
             filled
             dense
@@ -33,14 +33,13 @@
             label="Situação"
           />
         </div>
-        <div class="col-2">
+        <div class="col-xs-12 col-sm-6 col-md-3">
           <q-input
             filled
-            v-model="dateActivation.from"
+            v-model="dateActivationRange"
             type="text"
             dense
             label="Data Ativação"
-            :rules="['date']"
           >
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
@@ -59,14 +58,12 @@
             </template>
           </q-input>
         </div>
-        <div class="col-2">
+        <div class="col-xs-12 col-sm-6 col-md-3">
           <q-input
             filled
-            v-model="dateCancel"
+            v-model="dateCancelRange"
             dense
-            mask="maskDate"
             label="Data Cancelamento"
-            :rules="['date']"
           >
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
@@ -85,14 +82,12 @@
             </template>
           </q-input>
         </div>
-        <div class="col-2">
+        <div class="col-xs-12 col-sm-6 col-md-3">
           <q-input
             filled
-            v-model="dateBirth"
+            v-model="dateBirthRange"
             dense
-            mask="date"
             label="Data Nascimento"
-            :rules="['date']"
           >
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
@@ -111,8 +106,17 @@
             </template>
           </q-input>
         </div>
-        <div class="col-2">
-          <q-btn rounded color="primary" icon="search" @click="searchClients" />
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <q-select
+            filled
+            dense
+            v-model="day"
+            :options="optionsDay"
+            label="Dia de vencimento"
+          />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <q-btn color="primary" icon="search" @click="searchClients" />
         </div>
       </div>
     </q-card-section>
@@ -120,7 +124,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 export default {
   // name: 'ComponentName',
@@ -139,29 +143,53 @@ export default {
     let optionsSituation = computed({
       get: () => $store.state.sendMessage.optionsSituation
     });
-    let dateActivation = ref({ from: "2020/07/08", to: "2020/07/17" });
-    let dateCancel = ref({ from: "2020/07/08", to: "2020/07/17" });
-    let dateBirth = ref({ from: "2020/07/08", to: "2020/07/17" });
+    let dateActivation = ref({ from: "", to: "" });
+    let dateActivationRange = ref("");
+    dateActivationRange.value =
+      typeof dateActivation.value == "object"
+        ? dateActivation.value.from + " - " + dateActivation.value.to
+        : dateActivation.value;
+    let dateCancel = ref({ from: "", to: "" });
+    let dateCancelRange = ref("");
+    dateCancelRange.value =
+      typeof dateCancel.value == "object"
+        ? dateCancel.value.from + " - " + dateCancel.value.to
+        : dateCancel.value;
+    let dateBirth = ref({ from: "", to: "" });
+    let dateBirthRange = ref("");
+    dateBirthRange.value =
+      typeof dateBirth.value == "object"
+        ? dateBirth.value.from + " - " + dateBirth.value.to
+        : dateBirth.value;
+    let day = ref("");
+    let optionsDay = computed({
+      get: () => $store.state.sendMessage.optionsDay
+    });
 
-    let maskDate = () => {
-      const dateRegex = /\d{4}[/-]\d{2}[/-]\d{2}/;
-      const rangeRegex = /\d{4}[/-]\d{2}[/-]\d{2} \- \d{4}[/-]\d{2}[/-]\d{2}/;
-      const mask = (maskValue) => {
-        if (rangeRegex.test(maskValue)) {
-          return "####/##/## - ####/##/##";
-        } else if (dateRegex.test(maskValue)) {
-          return "####/##/##";
-        } else {
-          return "";
-        }
-      };
-      return mask;
-    };
     let searchClients = () => {
-      console.log(`${city.value} + ${status.value} + ${date.value}`);
+      console.log(`${city.value} + ${status.value}`);
     };
+
+    watch(dateActivation, (newValue, oldValue) => {
+      dateActivationRange.value =
+        typeof newValue == "object"
+          ? newValue.from + " - " + newValue.to
+          : newValue;
+    });
+    watch(dateCancel, (newValue, oldValue) => {
+      dateCancelRange.value =
+        typeof newValue == "object"
+          ? newValue.from + " - " + newValue.to
+          : newValue;
+    });
+    watch(dateBirth, (newValue, oldValue) => {
+      dateBirthRange.value =
+        typeof newValue == "object"
+          ? newValue.from + " - " + newValue.to
+          : newValue;
+    });
+
     return {
-      maskDate,
       city,
       optionsCity,
       status,
@@ -170,6 +198,12 @@ export default {
       optionsSituation,
       dateActivation,
       dateCancel,
+      dateBirth,
+      dateActivationRange,
+      dateCancelRange,
+      dateBirthRange,
+      day,
+      optionsDay,
       searchClients
     };
   }
