@@ -43,7 +43,13 @@ const linksList = [
     title: "Mensagem",
     caption: "Envio de mensagens",
     icon: "mail",
-    link: "/message",
+    link: "#/message",
+  },
+  {
+    title: "Operadoras",
+    caption: "Acesso às operadoras",
+    icon: "phone",
+    link: "#/operators",
   }
 ];
 

@@ -2,7 +2,8 @@ import { store } from "quasar/wrappers";
 import { createStore } from "vuex";
 
 // import example from './module-example'
-import sendMessage from './sendMessage'
+import sendMessage from "./sendMessage";
+import operators from "./operators";
 
 /*
  * If not building with SSR mode, you can
@@ -17,7 +18,8 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
       // example
-      sendMessage
+      sendMessage,
+      operators,
     },
 
     // enable strict mode (adds overhead!)
