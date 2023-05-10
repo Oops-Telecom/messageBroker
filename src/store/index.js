@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 
 // import example from './module-example'
 import sendMessage from "./sendMessage";
-import operators from "./operators";
+import plans from "./plans";
 
 /*
  * If not building with SSR mode, you can
@@ -19,7 +19,7 @@ export default store(function (/* { ssrContext } */) {
     modules: {
       // example
       sendMessage,
-      operators,
+      plans,
     },
 
     // enable strict mode (adds overhead!)

@@ -1,6 +1,6 @@
 export default function () {
   return {
-    operators: [
+    plansList: [
       {
         id: "1",
         operator: "NVOIP",

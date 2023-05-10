@@ -1,14 +1,14 @@
 <template>
   <q-page class="q-pa-all">
-    <operators-table />
+    <plans-table />
   </q-page>
 </template>
 
 <script>
-import OperatorsTable from "components/OperatorsTable";
+import PlansTable from "components/PlansTable";
 
 export default {
   name: 'OperatorsPage',
-  components: { OperatorsTable }
+  components: { PlansTable }
 }
 </script>
