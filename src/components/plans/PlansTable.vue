@@ -33,7 +33,7 @@
           </q-td>
 
           <q-td key="price" :props="props">
-            {{ props.row.price }}
+            {{ `R$ ${props.row.price}` }}
             <q-popup-edit v-model="props.row.price" title="Atualizar preço" auto-save v-slot="scope">
               <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
             </q-popup-edit>
