@@ -4,7 +4,11 @@
       <template v-slot:top>
         <div class="fit row align-center justify-between">
           <span class="text-h5">Planos</span>
-          <q-btn color="positive" label="Salvar alterações" @click="updateRows" />
+
+          <div class="row align-center justify-center q-gutter-sm">
+            <q-btn color="positive" label="Salvar alterações" @click="updateRows" />
+            <q-btn color="primary" icon="add" @click="openCreatePlanModal" />
+          </div>
         </div>
       </template>
 
@@ -38,15 +42,18 @@
       </template>
     </q-table>
   </div>
+  <CreatePlan :isOpen="openDialog" @close="closeDialog" />
 </template>
 
 <script>
 import { useStore } from 'vuex'
 import _ from 'lodash'
-import { computed, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
+import CreatePlan from './CreatePlan'
 
 export default {
   name: 'OperatorsTable',
+  components: { CreatePlan },
   setup() {
     const $store = useStore()
     const column = [
@@ -55,6 +62,7 @@ export default {
       { name: 'service', label: 'Serviço', field: 'service', sortable: true, align: 'left' },
       { name: 'price', label: 'Preço', field: 'price', sortable: true, align: 'left' },
     ]
+    const openDialog = ref(false)
 
     const rows = computed(() => {
       return reactive(
@@ -65,10 +73,21 @@ export default {
       $store.commit('plans/setPlans', { plansList: rows.value });
     }
 
+    const openCreatePlanModal = () => {
+      openDialog.value = true;
+    }
+
+    const closeDialog = () => {
+      openDialog.value = false;
+    }
+
     return {
       column,
+      openDialog,
       rows,
-      updateRows
+      updateRows,
+      openCreatePlanModal,
+      closeDialog
     }
   }
 }

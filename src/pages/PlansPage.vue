@@ -1,11 +1,11 @@
 <template>
   <q-page class="q-pa-all">
-    <plans-table />
+    <PlansTable />
   </q-page>
 </template>
 
 <script>
-import PlansTable from "components/PlansTable";
+import PlansTable from "components/plans/PlansTable";
 
 export default {
   name: 'OperatorsPage',
