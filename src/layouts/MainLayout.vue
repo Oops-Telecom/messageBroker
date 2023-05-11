@@ -39,6 +39,12 @@ const linksList = [
     caption: "Acesso aos planos",
     icon: "phone",
     link: "#/plans",
+  },
+  {
+    title: "Login",
+    caption: "Página de login",
+    icon: "login",
+    link: "#/auth"
   }
 ];
 
