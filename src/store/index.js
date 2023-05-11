@@ -4,6 +4,7 @@ import { createStore } from "vuex";
 // import example from './module-example'
 import sendMessage from "./sendMessage";
 import plans from "./plans";
+import user from "./user";
 
 /*
  * If not building with SSR mode, you can
@@ -20,6 +21,7 @@ export default store(function (/* { ssrContext } */) {
       // example
       sendMessage,
       plans,
+      user,
     },
 
     // enable strict mode (adds overhead!)
