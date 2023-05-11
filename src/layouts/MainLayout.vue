@@ -2,14 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> Oops Message Broker </q-toolbar-title>
 
@@ -21,11 +14,7 @@
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
 
@@ -43,7 +32,13 @@ const linksList = [
     title: "Mensagem",
     caption: "Envio de mensagens",
     icon: "mail",
-    link: "/message",
+    link: "#/message",
+  },
+  {
+    title: "Planos",
+    caption: "Acesso aos planos",
+    icon: "phone",
+    link: "#/plans",
   }
 ];
 
