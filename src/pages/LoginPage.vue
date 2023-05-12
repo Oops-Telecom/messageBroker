@@ -1,69 +1,30 @@
 <template>
-  <q-page class="fit q-pa-md column flex-center">
-    <p class="medium-width text-h2 q-mb-xl text-center">Realizar login</p>
-
-    <q-form @submit.prevent="onSubmit" class="q-gutter-sm medium-width">
-      <q-input type="email" class="fit" outlined v-model="email" label="Email" :rules="[
-        val => val && val.length > 0 || 'Campo obrigatório',
-        val => val && validateEmail(val) || 'Email inválido'
-      ]" />
-
-      <q-input type="password" class="fit" outlined v-model="password" label="Senha" :rules="[
-        val => val && val.length > 0 || 'Campo obrigatório',
-        val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres'
-      ]" />
-
-      <div class="full-width row align-center justify-between q-gutter-md">
-        <q-btn class="btn-width" to="/register" label="Cadastrar-se" type="button" color="primary" />
-        <q-btn class="btn-width" label="Entrar" type="submit" color="primary" />
+  <q-page class="row align-center justify-center q-row-gutter-md">
+    <div class="bg-primary col-md-5 row flex-center">
+      <div class="q-pa-md icon-bg rounded-borders">
+        <q-img
+          src="https://firebasestorage.googleapis.com/v0/b/gestaofiliais-44cfd.appspot.com/o/assets%2Flogo.png?alt=media&token=67cb6c52-4c16-400f-9369-f3960b0b2722"
+          spinner-color="white" style="height: 8rem; width: 8rem;" alt="Logo da Oops Telecom" />
       </div>
-    </q-form>
+    </div>
+    <LoginForm />
   </q-page>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import LoginForm from '../components/auth/LoginForm.vue';
 
 export default {
   name: 'LoginPage',
+  components: { LoginForm },
   setup() {
-    const $store = useStore()
-    const $router = useRouter()
-    const email = ref('')
-    const password = ref('')
-
-    const onSubmit = async (e) => {
-      const credentials = { email: email.value, password: password.value }
-      const loggedIn = await $store.dispatch("user/login", credentials)
-
-      if (loggedIn) {
-        $router.push("/home");
-      }
-    }
-
-    const validateEmail = (val) => {
-      const emailRegex = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/
-      return emailRegex.test(val)
-    }
-
-    return {
-      email,
-      password,
-      onSubmit,
-      validateEmail
-    }
+    return {}
   }
 }
 </script>
 
 <style scoped>
-.medium-width {
-  width: 30rem;
-}
-
-.btn-width {
-  min-width: 10rem;
+.icon-bg {
+  background-color: #0b2541;
 }
 </style>
