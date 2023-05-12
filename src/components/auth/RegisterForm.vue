@@ -1,22 +1,29 @@
 <template>
-  <p class="medium-width text-h2 q-mb-xl text-center">Realizar cadastro</p>
+  <div class="col q-pa-xl">
+    <p class="text-h3 q-mb-lg text-center">Realizar cadastro</p>
+    <p class="text-h6 q-mb-xl text-center text-grey-7">Bem-vindo a página de cadastro</p>
 
-  <q-form @submit.prevent="onSubmit" class="q-gutter-sm medium-width">
-    <q-input type="email" class="fit" outlined v-model="email" label="Email" :rules="[
-      val => val && val.length > 0 || 'Campo obrigatório',
-      val => val && validateEmail(val) || 'Email inválido'
-    ]" />
+    <q-form @submit.prevent="onSubmit" class="q-col-gutter-sm">
+      <q-input type="email" class="q-mx-xl" outlined v-model="email" label="Email" :rules="[
+        val => val && val.length > 0 || 'Campo obrigatório',
+        val => val && validateEmail(val) || 'Email inválido'
+      ]" />
 
-    <q-input type="password" class="fit" outlined v-model="password" label="Senha" :rules="[
-      val => val && val.length > 0 || 'Campo obrigatório',
-      val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres'
-    ]" />
+      <q-input type="password" class="q-mx-xl" outlined v-model="password" label="Senha" :rules="[
+        val => val && val.length > 0 || 'Campo obrigatório',
+        val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres'
+      ]" />
 
-    <div class="full-width row align-center justify-between q-gutter-md">
-      <q-btn class="btn-width" to="/" label="Voltar para login" type="button" color="primary" />
-      <q-btn class="btn-width" label="Cadastrar-se" type="submit" color="primary" />
-    </div>
-  </q-form>
+      <div class="row align-center justify-end q-mb-xl q-mx-xl">
+        <q-btn class="col-5" label="Cadastrar-se" type="submit" color="primary" />
+      </div>
+
+      <p class="text-center">
+        Já tem conta?
+        <span class="col-5 text-primary cursor-pointer" @click="goToLogin">entre</span>
+      </p>
+    </q-form>
+  </div>
 </template>
 
 <script>
@@ -46,11 +53,16 @@ export default {
       }
     }
 
+    const goToLogin = () => {
+      $router.push("/")
+    }
+
     return {
       email,
       password,
       validateEmail,
-      onSubmit
+      onSubmit,
+      goToLogin
     }
   }
 }
