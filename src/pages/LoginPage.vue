@@ -1,6 +1,6 @@
 <template>
-  <q-page class="fit  q-pa-md column flex-center">
-    <p class="text-h2 q-mb-xl text-center">Realizar login</p>
+  <q-page class="fit q-pa-md column flex-center">
+    <p class="medium-width text-h2 q-mb-xl text-center">Realizar login</p>
 
     <q-form @submit.prevent="onSubmit" class="q-gutter-sm medium-width">
       <q-input type="email" class="fit" outlined v-model="email" label="Email" :rules="[
@@ -13,8 +13,9 @@
         val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres'
       ]" />
 
-      <div class="row align-end justify-end">
-        <q-btn class="btn-width " label="Entrar" type="submit" color="primary" />
+      <div class="full-width row align-center justify-between q-gutter-md">
+        <q-btn class="btn-width" to="/register" label="Cadastrar-se" type="button" color="primary" />
+        <q-btn class="btn-width" label="Entrar" type="submit" color="primary" />
       </div>
     </q-form>
   </q-page>
