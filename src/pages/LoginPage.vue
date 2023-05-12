@@ -38,7 +38,7 @@ export default {
       const loggedIn = await $store.dispatch("user/login", credentials)
 
       if (loggedIn) {
-        $router.push("/#");
+        $router.push("/home");
       }
     }
 
