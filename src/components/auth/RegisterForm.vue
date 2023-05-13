@@ -21,7 +21,7 @@
       ]" />
 
       <div class="row align-center justify-end q-mb-xl q-mx-xl">
-        <q-btn class="col-5" label="Cadastrar-se" type="submit" color="primary" />
+        <q-btn class="col-xs-12 col-5" label="Cadastrar-se" type="submit" color="primary" />
       </div>
 
       <p class="text-center">
