@@ -1,5 +1,5 @@
 <template>
-  <div class="col q-pa-xl">
+  <div class="col-xs-auto col-sm-6 col-md-6 col-lg-6 q-pa-xl column align-center justify-center">
     <p class="text-h3 q-mb-lg text-center">Realizar login</p>
     <p class="text-h6 q-mb-xl text-center text-grey-7">Bem-vindo a página de login</p>
 
