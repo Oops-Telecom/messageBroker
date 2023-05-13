@@ -7,19 +7,17 @@
           spinner-color="white" style="height: 8rem; width: 8rem;" alt="Logo da Oops Telecom" />
       </div>
     </div>
-    <LoginForm />
+
+    <RegisterForm />
   </q-page>
 </template>
 
 <script>
-import LoginForm from '../components/auth/LoginForm.vue';
+import RegisterForm from '../components/auth/RegisterForm.vue';
 
 export default {
-  name: 'LoginPage',
-  components: { LoginForm },
-  setup() {
-    return {}
-  }
+  name: 'CreateUserPage',
+  components: { RegisterForm }
 }
 </script>
 

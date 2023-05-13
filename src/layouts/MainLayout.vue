@@ -6,6 +6,8 @@
 
         <q-toolbar-title> Oops Message Broker </q-toolbar-title>
 
+        <q-btn class="logoutButton" label="Sair" color="white" text-color="white" outline @click="logout" />
+
         <div>v 0.0.1</div>
       </q-toolbar>
     </q-header>
@@ -39,16 +41,12 @@ const linksList = [
     caption: "Acesso aos planos",
     icon: "phone",
     link: "#/plans",
-  },
-  {
-    title: "Login",
-    caption: "Página de login",
-    icon: "login",
-    link: "#/auth"
   }
 ];
 
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "MainLayout",
@@ -58,7 +56,14 @@ export default defineComponent({
   },
 
   setup() {
+    const $store = useStore();
+    const $router = useRouter();
     const leftDrawerOpen = ref(false);
+
+    const logout = () => {
+      $store.dispatch('user/logout');
+      $router.push('/');
+    }
 
     return {
       essentialLinks: linksList,
@@ -66,7 +71,14 @@ export default defineComponent({
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
+      logout
     };
   },
 });
 </script>
+
+<style scoped>
+.logoutButton {
+  margin-right: 0.8rem;
+}
+</style>
