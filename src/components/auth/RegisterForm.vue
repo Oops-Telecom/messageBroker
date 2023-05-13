@@ -14,6 +14,12 @@
         val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres'
       ]" />
 
+      <q-input type="password" class="q-mx-xl" outlined v-model="confirmPassword" label="Confirmação de senha" :rules="[
+        val => val && val.length > 0 || 'Campo obrigatório',
+        val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres',
+        val => val && checkForEqualsPasswords(password, confirmPassword) || 'A senhas não coincidem'
+      ]" />
+
       <div class="row align-center justify-end q-mb-xl q-mx-xl">
         <q-btn class="col-5" label="Cadastrar-se" type="submit" color="primary" />
       </div>
@@ -38,10 +44,15 @@ export default {
     const $router = useRouter()
     const email = ref('')
     const password = ref('')
+    const confirmPassword = ref('')
 
     const validateEmail = (val) => {
       const emailRegex = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/
       return emailRegex.test(val)
+    }
+
+    const checkForEqualsPasswords = (password, confirmPassword) => {
+      return password === confirmPassword;
     }
 
     const onSubmit = async (e) => {
@@ -60,7 +71,9 @@ export default {
     return {
       email,
       password,
+      confirmPassword,
       validateEmail,
+      checkForEqualsPasswords,
       onSubmit,
       goToLogin
     }
