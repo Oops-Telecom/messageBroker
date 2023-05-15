@@ -60,12 +60,12 @@ export default {
       const registered = await $store.dispatch("user/register", credentials)
 
       if (registered) {
-        $router.push("/");
+        $router.push("/login");
       }
     }
 
     const goToLogin = () => {
-      $router.push("/")
+      $router.push("/login")
     }
 
     return {
