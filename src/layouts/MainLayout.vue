@@ -62,7 +62,7 @@ export default defineComponent({
 
     const logout = () => {
       $store.dispatch('user/logout');
-      $router.push('/');
+      $router.push('/login');
     }
 
     return {
