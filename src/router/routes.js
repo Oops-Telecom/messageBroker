@@ -18,12 +18,24 @@ const routes = [
   {
     path: "/painel",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Index.vue") }],
+    children: [
+      {
+        path: "",
+        component: () => import("pages/Index.vue"),
+        meta: { requiresAuth: true },
+      },
+    ],
   },
   {
     path: "/planos",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/PlansPage.vue") }],
+    children: [
+      {
+        path: "",
+        component: () => import("pages/PlansPage.vue"),
+        meta: { requiresAuth: true },
+      },
+    ],
   },
 
   // Always leave this as last one,

@@ -37,14 +37,18 @@ export default route(function (/* { store, ssrContext } */) {
     ),
   });
 
-  Router.beforeEach(async (to, from) => {
+  Router.beforeEach((to, from, next) => {
     const auth = getAuth(app);
     const isAuthenticated = auth.currentUser;
-    const isOnLoginPage = to.name === "Login";
-    const isOnRegisterPage = to.name === "Register";
 
-    if (!isAuthenticated && !isOnLoginPage && !isOnRegisterPage) {
-      return { name: "Login" };
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+      if (!isAuthenticated) {
+        next("/login");
+      } else {
+        next();
+      }
+    } else {
+      next();
     }
   });
 
