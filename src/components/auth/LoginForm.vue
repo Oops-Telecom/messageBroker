@@ -44,7 +44,7 @@ export default {
       const loggedIn = await $store.dispatch("user/login", credentials)
 
       if (loggedIn) {
-        $router.push("/home");
+        $router.push("/painel");
       }
     }
 
@@ -54,7 +54,7 @@ export default {
     }
 
     const goToRegister = () => {
-      $router.push("/register")
+      $router.push("/cadastro")
     }
 
     return {
