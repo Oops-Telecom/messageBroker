@@ -8,7 +8,11 @@ const routes = [
         name: "Login",
         component: () => import("pages/LoginPage.vue"),
       },
-      { path: "/cadastro", component: () => import("pages/RegisterPage.vue") },
+      {
+        path: "/cadastro",
+        name: "Register",
+        component: () => import("pages/RegisterPage.vue"),
+      },
     ],
   },
   {

@@ -41,8 +41,9 @@ export default route(function (/* { store, ssrContext } */) {
     const auth = getAuth(app);
     const isAuthenticated = auth.currentUser;
     const isOnLoginPage = to.name === "Login";
+    const isOnRegisterPage = to.name === "Register";
 
-    if (!isAuthenticated && !isOnLoginPage) {
+    if (!isAuthenticated && !isOnLoginPage && !isOnRegisterPage) {
       return { name: "Login" };
     }
   });
