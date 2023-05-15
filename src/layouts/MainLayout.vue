@@ -40,7 +40,7 @@ const linksList = [
     title: "Planos",
     caption: "Acesso aos planos",
     icon: "phone",
-    link: "#/plans",
+    link: "#/planos",
   }
 ];
 

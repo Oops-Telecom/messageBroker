@@ -1,5 +1,5 @@
 <template>
-  <div class="col q-pa-xl">
+  <div class="col-xs-auto col-sm-6 col-md-6 col-lg-6 q-pa-xl column align-center justify-center">
     <p class="text-h3 q-mb-lg text-center">Realizar login</p>
     <p class="text-h6 q-mb-xl text-center text-grey-7">Bem-vindo a página de login</p>
 
@@ -15,7 +15,7 @@
       ]" />
 
       <div class="row align-center justify-end q-mb-xl q-mx-xl">
-        <q-btn class="col-5" label="Entrar" type="submit" color="primary" />
+        <q-btn class="col-xs-12 col-5" label="Entrar" type="submit" color="primary" />
       </div>
 
       <p class="text-center">
@@ -44,7 +44,7 @@ export default {
       const loggedIn = await $store.dispatch("user/login", credentials)
 
       if (loggedIn) {
-        $router.push("/home");
+        $router.push("/painel");
       }
     }
 
@@ -54,7 +54,7 @@ export default {
     }
 
     const goToRegister = () => {
-      $router.push("/register")
+      $router.push("/cadastro")
     }
 
     return {

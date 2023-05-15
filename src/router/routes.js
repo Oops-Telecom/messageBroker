@@ -3,17 +3,25 @@ const routes = [
     path: "/",
     component: () => import("layouts/AuthLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/LoginPage.vue") },
-      { path: "/register", component: () => import("pages/RegisterPage.vue") },
+      {
+        path: "/login",
+        name: "Login",
+        component: () => import("pages/LoginPage.vue"),
+      },
+      {
+        path: "/cadastro",
+        name: "Register",
+        component: () => import("pages/RegisterPage.vue"),
+      },
     ],
   },
   {
-    path: "/home",
+    path: "/painel",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/Index.vue") }],
   },
   {
-    path: "/plans",
+    path: "/planos",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/PlansPage.vue") }],
   },

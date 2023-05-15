@@ -6,6 +6,8 @@ import {
   createWebHashHistory,
 } from "vue-router";
 import routes from "./routes";
+import { getAuth } from "firebase/auth";
+import { app } from "../boot/firebase";
 
 /*
  * If not building with SSR mode, you can
@@ -33,6 +35,17 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(
       process.env.MODE === "ssr" ? void 0 : process.env.VUE_ROUTER_BASE
     ),
+  });
+
+  Router.beforeEach(async (to, from) => {
+    const auth = getAuth(app);
+    const isAuthenticated = auth.currentUser;
+    const isOnLoginPage = to.name === "Login";
+    const isOnRegisterPage = to.name === "Register";
+
+    if (!isAuthenticated && !isOnLoginPage && !isOnRegisterPage) {
+      return { name: "Login" };
+    }
   });
 
   return Router;

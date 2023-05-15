@@ -1,5 +1,5 @@
 <template>
-  <div class="col q-pa-xl">
+  <div class="col-xs-auto col-sm-6 col-md-6 col-lg-6 q-pa-xl column align-center justify-center">
     <p class="text-h3 q-mb-lg text-center">Realizar cadastro</p>
     <p class="text-h6 q-mb-xl text-center text-grey-7">Bem-vindo a página de cadastro</p>
 
@@ -14,8 +14,14 @@
         val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres'
       ]" />
 
+      <q-input type="password" class="q-mx-xl" outlined v-model="confirmPassword" label="Confirmação de senha" :rules="[
+        val => val && val.length > 0 || 'Campo obrigatório',
+        val => val && val.length >= 6 || 'A senha precisa ter 6 ou mais caracteres',
+        val => val && checkForEqualsPasswords(password, confirmPassword) || 'A senhas não coincidem'
+      ]" />
+
       <div class="row align-center justify-end q-mb-xl q-mx-xl">
-        <q-btn class="col-5" label="Cadastrar-se" type="submit" color="primary" />
+        <q-btn class="col-xs-12 col-5" label="Cadastrar-se" type="submit" color="primary" />
       </div>
 
       <p class="text-center">
@@ -38,10 +44,15 @@ export default {
     const $router = useRouter()
     const email = ref('')
     const password = ref('')
+    const confirmPassword = ref('')
 
     const validateEmail = (val) => {
       const emailRegex = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/
       return emailRegex.test(val)
+    }
+
+    const checkForEqualsPasswords = (password, confirmPassword) => {
+      return password === confirmPassword;
     }
 
     const onSubmit = async (e) => {
@@ -49,18 +60,20 @@ export default {
       const registered = await $store.dispatch("user/register", credentials)
 
       if (registered) {
-        $router.push("/");
+        $router.push("/login");
       }
     }
 
     const goToLogin = () => {
-      $router.push("/")
+      $router.push("/login")
     }
 
     return {
       email,
       password,
+      confirmPassword,
       validateEmail,
+      checkForEqualsPasswords,
       onSubmit,
       goToLogin
     }
@@ -68,12 +81,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.medium-width {
-  width: 30rem;
-}
-
-.btn-width {
-  min-width: 10rem;
-}
-</style>
